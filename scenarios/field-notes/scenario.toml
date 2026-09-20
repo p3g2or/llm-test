@@ -1,0 +1,15 @@
+name = "field-notes"
+baseline = "baseline"
+default_task = "known-bug"
+validation_command = "bash scripts/check.sh"
+coding_timeout = 900
+
+[tasks]
+known-bug = "tasks/known-bug.md"
+false-category-mixing = "tasks/false-category-mixing.md"
+note-limit = "tasks/note-limit.md"
+
+# Immutable prompt identities; add a new version when changing the task text.
+[prompt_versions.known-bug]
+v1 = "5acb42e2e45407c78823796cfe22f6ab0bd3b1606436e0dcc6163bcab3f95739"
+v2 = "625133800db0a1e03137801e644971c009195524b6876ec327edff83418c2b05"

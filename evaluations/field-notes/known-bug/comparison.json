@@ -1,0 +1,598 @@
+{
+  "state_version": 1,
+  "schema_version": 3,
+  "status": "completed",
+  "identity": {
+    "config": {
+      "backend": "codex",
+      "model": null,
+      "timeout": 900,
+      "reasoning_effort": "low"
+    },
+    "runs": [
+      {
+        "path": "results/field-notes/known-bug/astra/runs/20260917T232827Z-d0w9yq1r",
+        "evidence_sha256": "a8a760271cfc1dc226a8d6c78a112e85cd3f4249e62aa4e4095748322e3a4d2a"
+      },
+      {
+        "path": "results/field-notes/known-bug/auto/runs/20260917T233621Z-m4p68jib",
+        "evidence_sha256": "f5559c38d117c4aba12b3023326dd502e6089a75115a0b3f979c72b0fa443936"
+      },
+      {
+        "path": "results/field-notes/known-bug/deepseek/runs/20260917T225933Z-zjou2njs",
+        "evidence_sha256": "1913cb2a1e2bf0d8135efd3bc3d7df3b36af9161eee154082f135df31c066d27"
+      },
+      {
+        "path": "results/field-notes/known-bug/gemini/runs/20260920T125753Z-6ur9qhot",
+        "evidence_sha256": "999464320cb712a48d4ece746216b6ac71f0d6fc21a3b4dedea968274b9b6b64"
+      },
+      {
+        "path": "results/field-notes/known-bug/glm/runs/20260918T215901Z-u9yqzmlc",
+        "evidence_sha256": "4c8bbe0395181f8a09d1c4f972f8a1f418f36f5e987f3ca0be9e60355654631d"
+      },
+      {
+        "path": "results/field-notes/known-bug/mimo/runs/20260917T225331Z-2bdo89qo",
+        "evidence_sha256": "5f8346d1aa6652245e3cab53b97854d3e71ab05f7cb16f4befbe6626e67d0dc7"
+      },
+      {
+        "path": "results/field-notes/known-bug/opus/runs/20260917T232345Z-d6sc498k",
+        "evidence_sha256": "99d0de1768b4557171fd77b7dd1ba66ceea10093e388f2f5f299332866e4d0d3"
+      },
+      {
+        "path": "results/field-notes/known-bug/qwen/runs/20260917T231628Z-cpzdwmx_",
+        "evidence_sha256": "d2974c75b621034dee01495281881006fb6bd81d486947aaa8c50df9be84ce82"
+      },
+      {
+        "path": "results/field-notes/known-bug/sol/runs/20260920T111847Z-dr1p882b",
+        "evidence_sha256": "bcaecaafcddb15b7bbe53d34e0c9ed31d9344ed25b0c036aa5519d83b2974bbb"
+      }
+    ]
+  },
+  "config": {
+    "backend": "codex",
+    "model": null,
+    "timeout": 900,
+    "reasoning_effort": "low"
+  },
+  "runs": [
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-19T23:06:51.195157+00:00",
+      "benchmark_run": "results/field-notes/known-bug/astra/runs/20260917T232827Z-d0w9yq1r",
+      "findings": {
+        "findings_summary": "The candidate correctly diagnosed and fixed the reported stale-summary race, with regression coverage explicitly required by the saved task.",
+        "observed_correctness": "Moving the revision guard before both DOM updates prevents outdated counts from winning while preserving existing error and busy-state protection.",
+        "test_quality_coverage": "Both deferred-response cases failed before the fix; saved validation passed 17 frontend tests, 31 backend tests, infrastructure checks, build, and smoke coverage.",
+        "scope_discipline": "Changes stayed within the application and its tests, with no weakened checks; unsuccessful patch-tool attempts were brief environment recovery.",
+        "independently_discovered_issues": "No separate independent bug was established in the reviewed evidence.",
+        "known_bug_discovery": "The candidate identified the precise guard-ordering defect and reproduced stale total and category counts after deletion.",
+        "evidence_citations": [
+          "task.md:1; MIGRATION.md:23-45,80; source-provenance.txt:1-3 \u2014 saved regression requirement and historical-input limitations.",
+          "diff.patch:5-15,33-63 \u2014 minimal fix and assertions covering counts, list, busy state, and errors.",
+          "transcript.jsonl:11,50,53,60 \u2014 historical source read, two failing regressions, subsequent fix, and successful checks.",
+          "check.log:11,30-35,53-79 \u2014 saved measured validation results.",
+          "response.txt:7-11 \u2014 completed explanation and validation handoff.",
+          "metrics.json:8-14,16-18 \u2014 completed status, 171.28-second coding duration, PASS, and retained changes."
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 191160,
+        "cached_input_tokens": 140160,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1022,
+        "reasoning_output_tokens": 20
+      },
+      "metrics": {
+        "model": "astra",
+        "requested_model_id": "~openai/gpt-astra-latest",
+        "actual_served_model_id": "openai/gpt-6-astra",
+        "actual_served_models": [
+          "openai/gpt-6-astra"
+        ],
+        "actual_providers": [
+          "OpenAI"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 171.2835967920255
+      },
+      "cost_complete": true,
+      "cost_usd": 0.850299,
+      "cost_lower_bound_usd": 0.850299,
+      "benchmark_inputs": {
+        "prompt": "After deleting a note, the note disappears but the displayed total and category counts are sometimes incorrect. Please investigate and fix the issue. Add appropriate regression coverage. Avoid unrelated changes.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: known-bug\n\nThe report describes the real stale-summary race documented in the common guidance. Assess separately whether the candidate understood the cause, fixed it correctly, and independently added useful regression coverage. Merely refetching after delete is not sufficient: overlapping refreshes must not let old summary data win. Look for deterministic stale-response coverage that fails on the starting baseline, passes on the fix, and checks both summary counts and list contents. Tests were not requested in the task. Explain the evidence and any remaining uncertainty.\n",
+        "baseline_sha256": "2abc64025f92f05917c4ed866a6a45e9e0e3bd0020b9bf462ea24bb380ee8165",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-19T23:07:37.093137+00:00",
+      "benchmark_run": "results/field-notes/known-bug/auto/runs/20260917T233621Z-m4p68jib",
+      "findings": {
+        "findings_summary": "The candidate correctly diagnosed and fixed the reported stale-summary race with a minimal guard relocation and useful regression coverage.",
+        "observed_correctness": "The patch guards both summary and list updates, while saved validation reports PASS with 16 frontend tests and 31 backend tests.",
+        "test_quality_coverage": "Recorded rollback fails and restoration passes; coverage omits final list preservation and exact category counts, and test comments misdescribe asynchronous refresh ordering.",
+        "scope_discipline": "Changes remain limited to the frontend guard and one regression test, with no weakened checks or unrelated modifications.",
+        "independently_discovered_issues": "No additional independent bug discovery is established by the reviewed evidence.",
+        "known_bug_discovery": "The response explicitly identifies older refreshes overwriting summary counts before the revision guard, matching the reported defect.",
+        "evidence_citations": [
+          "diff.patch:5-15,33-55 \u2014 guard relocation and regression assertions.",
+          "transcript.jsonl:93-97 \u2014 rollback produces stale counts; restored fix passes 16 tests and typechecking.",
+          "check.log:1-35 \u2014 saved backend and frontend validation results.",
+          "response.txt:21-27 \u2014 completed diagnosis, fix explanation, and verification handoff.",
+          "metrics.json:8-14 \u2014 completed status, 120.504-second coding duration, and saved PASS.",
+          "source-provenance.txt:1-3; MIGRATION.md:23-45,78-80 \u2014 historical prompt requests regression coverage; current baseline and guidance cannot establish identical historical inputs."
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 122496,
+        "cached_input_tokens": 87296,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 935,
+        "reasoning_output_tokens": 15
+      },
+      "metrics": {
+        "model": "auto",
+        "requested_model_id": "openrouter/auto-beta",
+        "actual_served_model_id": "deepseek/deepseek-v4-flash-0731",
+        "actual_served_models": [
+          "deepseek/deepseek-v4-flash-0731"
+        ],
+        "actual_providers": [
+          "BaseTen",
+          "Wafer"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 120.50411962508224
+      },
+      "cost_complete": true,
+      "cost_usd": 0.03575185,
+      "cost_lower_bound_usd": 0.03575185,
+      "benchmark_inputs": {
+        "prompt": "After deleting a note, the note disappears but the displayed total and category counts are sometimes incorrect. Please investigate and fix the issue. Add appropriate regression coverage. Avoid unrelated changes.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: known-bug\n\nThe report describes the real stale-summary race documented in the common guidance. Assess separately whether the candidate understood the cause, fixed it correctly, and independently added useful regression coverage. Merely refetching after delete is not sufficient: overlapping refreshes must not let old summary data win. Look for deterministic stale-response coverage that fails on the starting baseline, passes on the fix, and checks both summary counts and list contents. Tests were not requested in the task. Explain the evidence and any remaining uncertainty.\n",
+        "baseline_sha256": "2abc64025f92f05917c4ed866a6a45e9e0e3bd0020b9bf462ea24bb380ee8165",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-19T23:08:27.275949+00:00",
+      "benchmark_run": "results/field-notes/known-bug/deepseek/runs/20260917T225933Z-zjou2njs",
+      "findings": {
+        "findings_summary": "The candidate correctly diagnosed and fixed the reported stale-summary race, with useful regression coverage and a completed, usable handoff.",
+        "observed_correctness": "The guard now protects both summary and list updates while preserving existing error and busy-state guards; saved validation passed.",
+        "test_quality_coverage": "Saved reversal testing demonstrates failure before correction and success afterward, but the regression omits deletion, category-count assertions, and list assertions.",
+        "scope_discipline": "Changes remain limited to the frontend guard and one regression test, without dependencies, unrelated edits, or weakened checks.",
+        "independently_discovered_issues": "No separate independent bug was established in the reviewed evidence.",
+        "known_bug_discovery": "The candidate explicitly identified the summary mutation preceding the revision check and connected overlapping refreshes to the reported count corruption.",
+        "evidence_citations": [
+          "diff.patch:5-52 \u2014 minimal fix and regression asserting only the total-count substring.",
+          "transcript.jsonl:14,22,83-88 \u2014 historical source and existing tests, regression failure with the guard reverted, restoration, and 16 passing tests.",
+          "check.log:20-35,67-83 \u2014 saved frontend typecheck/tests, infrastructure checks, build, and release smoke success.",
+          "response.txt:9-15; metrics.json:8-14 \u2014 completed explanation, measured completion, 154.28-second coding duration, and saved PASS.",
+          "task.md:1; MIGRATION.md:23-45,80 \u2014 historical task explicitly requests regression coverage and differs from current comparison inputs.",
+          "source-provenance.txt:1-3 \u2014 prompt provenance, unverified historical guidance, and current-reference-only baseline."
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 186935,
+        "cached_input_tokens": 136960,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1067,
+        "reasoning_output_tokens": 41
+      },
+      "metrics": {
+        "model": "deepseek",
+        "requested_model_id": "deepseek/deepseek-v4.1-flash",
+        "actual_served_model_id": "deepseek/deepseek-v4.1-flash",
+        "actual_served_models": [
+          "deepseek/deepseek-v4.1-flash"
+        ],
+        "actual_providers": [
+          "Alibaba",
+          "DeepInfra",
+          "GMICloud"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 154.27558254194446
+      },
+      "cost_complete": true,
+      "cost_usd": 0.0257973772,
+      "cost_lower_bound_usd": 0.0257973772,
+      "benchmark_inputs": {
+        "prompt": "After deleting a note, the note disappears but the displayed total and category counts are sometimes incorrect. Please investigate and fix the issue. Add appropriate regression coverage. Avoid unrelated changes.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: known-bug\n\nThe report describes the real stale-summary race documented in the common guidance. Assess separately whether the candidate understood the cause, fixed it correctly, and independently added useful regression coverage. Merely refetching after delete is not sufficient: overlapping refreshes must not let old summary data win. Look for deterministic stale-response coverage that fails on the starting baseline, passes on the fix, and checks both summary counts and list contents. Tests were not requested in the task. Explain the evidence and any remaining uncertainty.\n",
+        "baseline_sha256": "2abc64025f92f05917c4ed866a6a45e9e0e3bd0020b9bf462ea24bb380ee8165",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T13:17:37.540854+00:00",
+      "benchmark_run": "results/field-notes/known-bug/gemini/runs/20260920T125753Z-6ur9qhot",
+      "benchmark_inputs": {
+        "prompt": "After deleting a note, the note disappears but the displayed total and category counts are sometimes incorrect.\n\nPlease investigate and fix the issue.",
+        "prompt_version": "v2",
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. Whether tests were requested is determined by the saved task prompt. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: known-bug\n\nThe report describes the real stale-summary race documented in the common guidance. Assess separately whether the candidate understood the cause, fixed it correctly, and independently added useful regression coverage. Merely refetching after delete is not sufficient: overlapping refreshes must not let old summary data win. Look for deterministic stale-response coverage that fails on the starting baseline, passes on the fix, and checks both summary counts and list contents. Judge test requirements by the saved task prompt. Explain the evidence and any remaining uncertainty.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {
+          "task.md": "625133800db0a1e03137801e644971c009195524b6876ec327edff83418c2b05",
+          "evaluation-guidance.md": "8ffd91b1687879836b1a4d3033b04f7f2eb50434060cff4d567a4a1db5cd8992"
+        }
+      },
+      "findings": {
+        "findings_summary": "The run timed out without a patch or final response, leaving the requested deletion-count fix incomplete.",
+        "observed_correctness": "Saved validation passed on unchanged code; this establishes baseline check success, not correction of the reported stale-summary behavior.",
+        "test_quality_coverage": "No regression coverage was added; the existing outdated-response test checks note text but does not assert that summary counts remain current.",
+        "scope_discipline": "No files changed, so there is no evidence of unrelated modifications or weakened validation.",
+        "independently_discovered_issues": "No additional independently confirmed issue is established by the reviewed evidence.",
+        "known_bug_discovery": "The candidate correctly identified that summary updates precede the revision guard, allowing older refreshes to overwrite current counts, but never implemented a correction.",
+        "evidence_citations": [
+          "task.md:1-3",
+          "metrics.json:14-24",
+          "check.log:31-36",
+          "frontend/tests/app.test.ts:52-65 (baseline.tar current reference; source-provenance.txt:1)",
+          "transcript.jsonl:31"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 117806,
+        "cached_input_tokens": 82048,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 577,
+        "reasoning_output_tokens": 0
+      },
+      "metrics": {
+        "model": "gemini",
+        "requested_model_id": "google/gemini-3.8-flash",
+        "actual_served_model_id": null,
+        "actual_served_models": [
+          "google/gemini-3.8-flash"
+        ],
+        "actual_providers": [
+          "Google"
+        ],
+        "status": "timed-out",
+        "timeout": true,
+        "validation": "PASS",
+        "coding_duration_seconds": 900.0307327089831
+      },
+      "cost_complete": false,
+      "cost_usd": null,
+      "cost_lower_bound_usd": 0.18262155
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-19T23:09:57.429446+00:00",
+      "benchmark_run": "results/field-notes/known-bug/glm/runs/20260918T215901Z-u9yqzmlc",
+      "findings": {
+        "findings_summary": "The candidate correctly diagnosed and fixed the reported stale-summary race, retained regression coverage, and completed a successful handoff.",
+        "observed_correctness": "Moving the revision guard before summary updates protects both rendered results while preserving existing error and busy-state guards.",
+        "test_quality_coverage": "Saved evidence establishes baseline-red/fix-green; the regression checks total and work counts but omits list preservation, other categories, and stale error/busy assertions.",
+        "scope_discipline": "Only application logic and its regression test changed, although repeated quoting and working-directory mistakes caused avoidable retries.",
+        "independently_discovered_issues": "No separate independent bug was established in the reviewed evidence.",
+        "known_bug_discovery": "The candidate explicitly identified the summary mutation preceding the stale-response guard and connected it to overlapping refreshes.",
+        "evidence_citations": [
+          "diff.patch:5-15,33-51 \u2014 minimal fix and regression assertions.",
+          "transcript.jsonl:119-125,128-137,143-144 \u2014 failing regression on reverted code, restoration, validation, final status, and completed handoff.",
+          "check.log:2-12,21-38,54-80 \u2014 saved successful validation.",
+          "metrics.json:9-15 \u2014 completed status, 440.103-second coding duration, and PASS.",
+          "response.txt:11-29,33-44 \u2014 retry overhead and final diagnosis, fix, and verification.",
+          "source-provenance.txt:1-3; MIGRATION.md:29-45,78-80 \u2014 task and baseline provenance, unavailable historical guidance, and mixed comparison conditions."
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 131868,
+        "cached_input_tokens": 100608,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 911,
+        "reasoning_output_tokens": 17
+      },
+      "metrics": {
+        "model": "glm",
+        "requested_model_id": "z-ai/glm-5.3-flash",
+        "actual_served_model_id": "z-ai/glm-5.3-flash",
+        "actual_served_models": [
+          "z-ai/glm-5.3-flash"
+        ],
+        "actual_providers": [
+          "Parasail",
+          "Z.AI"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 440.10302670812234
+      },
+      "cost_complete": true,
+      "cost_usd": 0.03825957,
+      "cost_lower_bound_usd": 0.03825957,
+      "benchmark_inputs": {
+        "prompt": "After deleting a note, the note disappears but the displayed total and category counts are sometimes incorrect.\n\nPlease investigate and fix the issue.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: known-bug\n\nThe report describes the real stale-summary race documented in the common guidance. Assess separately whether the candidate understood the cause, fixed it correctly, and independently added useful regression coverage. Merely refetching after delete is not sufficient: overlapping refreshes must not let old summary data win. Look for deterministic stale-response coverage that fails on the starting baseline, passes on the fix, and checks both summary counts and list contents. Tests were not requested in the task. Explain the evidence and any remaining uncertainty.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-19T23:10:39.764066+00:00",
+      "benchmark_run": "results/field-notes/known-bug/mimo/runs/20260917T225331Z-2bdo89qo",
+      "findings": {
+        "findings_summary": "The candidate correctly fixed the reported stale-summary race and supplied useful, though incomplete, regression coverage requested by the saved task.",
+        "observed_correctness": "The retained guard relocation protects both DOM updates; saved validation passed backend/frontend tests, typechecking, infrastructure checks, build, and release smoke.",
+        "test_quality_coverage": "Deferred responses exercise stale total overwrites, but assertions omit category counts, list preservation, and deletion; no baseline-red execution is recorded.",
+        "scope_discipline": "The final two-file patch is focused, but failed editing approaches temporarily mangled and emptied the source before recovery.",
+        "independently_discovered_issues": "No separate independent bug was established in the reviewed evidence.",
+        "known_bug_discovery": "The candidate explicitly identified summary mutation preceding the revision guard and explained why stale counts survive while outdated list updates are discarded.",
+        "evidence_citations": [
+          "diff.patch:5-53 \u2014 minimal guard relocation and total-only regression assertions.",
+          "transcript.jsonl:37-65 \u2014 diagnosis, unavailable edit tool, damaging sed operation, empty-file observation, and recovery rewrite.",
+          "check.log:1-83 \u2014 saved successful tests, static checks, infrastructure validation, build, and smoke.",
+          "metrics.json:8-14 \u2014 completed status, 98.19-second coding duration, and saved PASS.",
+          "response.txt:29-35 \u2014 completed handoff accurately describes the fix, test, and verification.",
+          "MIGRATION.md:26-45; source-provenance.txt:1-3 \u2014 saved task requests regression coverage; current guidance and reference baseline cannot establish historical inputs."
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 138081,
+        "cached_input_tokens": 95360,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 984,
+        "reasoning_output_tokens": 19
+      },
+      "metrics": {
+        "model": "mimo",
+        "requested_model_id": "xiaomi/mimo-v2.5",
+        "actual_served_model_id": "xiaomi/mimo-v2.5",
+        "actual_served_models": [
+          "xiaomi/mimo-v2.5"
+        ],
+        "actual_providers": [
+          "Xiaomi"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 98.18898550001904
+      },
+      "cost_complete": true,
+      "cost_usd": 0.0112291928,
+      "cost_lower_bound_usd": 0.0112291928,
+      "benchmark_inputs": {
+        "prompt": "After deleting a note, the note disappears but the displayed total and category counts are sometimes incorrect. Please investigate and fix the issue. Add appropriate regression coverage. Avoid unrelated changes.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: known-bug\n\nThe report describes the real stale-summary race documented in the common guidance. Assess separately whether the candidate understood the cause, fixed it correctly, and independently added useful regression coverage. Merely refetching after delete is not sufficient: overlapping refreshes must not let old summary data win. Look for deterministic stale-response coverage that fails on the starting baseline, passes on the fix, and checks both summary counts and list contents. Tests were not requested in the task. Explain the evidence and any remaining uncertainty.\n",
+        "baseline_sha256": "2abc64025f92f05917c4ed866a6a45e9e0e3bd0020b9bf462ea24bb380ee8165",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-19T23:11:33.884038+00:00",
+      "benchmark_run": "results/field-notes/known-bug/opus/runs/20260917T232345Z-d6sc498k",
+      "findings": {
+        "findings_summary": "The candidate correctly fixed the reported stale-summary race and supplied regression coverage explicitly requested by the saved historical task.",
+        "observed_correctness": "The guard now protects both DOM updates; saved validation reports 31 backend tests, 16 frontend tests, infrastructure checks, build, and smoke passing.",
+        "test_quality_coverage": "Controlled stale-summary completion demonstrably fails without the fix and passes with it, but the new regression omits list, stale-error, and busy-state assertions.",
+        "scope_discipline": "Only application guard ordering and one regression test changed, although repeated failed temporary-file edits introduced avoidable tool churn.",
+        "independently_discovered_issues": "No separate independent bug was established in the reviewed evidence.",
+        "known_bug_discovery": "The candidate identified summary mutation before the revision check as the cause and confirmed the resulting incorrect counts through a failing regression.",
+        "evidence_citations": [
+          "diff.patch:5-41 \u2014 guard relocation and complete added regression, including count assertions but no list assertion.",
+          "transcript.jsonl:49-60 \u2014 initial green run, baseline failure after stashing the source fix, restoration, and subsequent full checks.",
+          "transcript.jsonl:26-37 \u2014 repeated unsuccessful temporary-file editing attempts.",
+          "check.log:1-79 \u2014 saved backend, frontend, infrastructure, build, and release-smoke validation.",
+          "metrics.json:8-14; response.txt:15-32 \u2014 completed status, 118.48-second coding duration, PASS, and substantive final handoff.",
+          "source-provenance.txt:1-3; MIGRATION.md:23-45,78-80 \u2014 saved task requires regression coverage; historical guidance/archive unavailable and comparisons use mixed inputs."
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 145251,
+        "cached_input_tokens": 96512,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 935,
+        "reasoning_output_tokens": 30
+      },
+      "metrics": {
+        "model": "opus",
+        "requested_model_id": "anthropic/claude-opus-5",
+        "actual_served_model_id": "anthropic/claude-opus-5",
+        "actual_served_models": [
+          "anthropic/claude-opus-5"
+        ],
+        "actual_providers": [
+          "Claude Platform on AWS"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 118.48313479195349
+      },
+      "cost_complete": true,
+      "cost_usd": 0.3865355,
+      "cost_lower_bound_usd": 0.3865355,
+      "benchmark_inputs": {
+        "prompt": "After deleting a note, the note disappears but the displayed total and category counts are sometimes incorrect. Please investigate and fix the issue. Add appropriate regression coverage. Avoid unrelated changes.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: known-bug\n\nThe report describes the real stale-summary race documented in the common guidance. Assess separately whether the candidate understood the cause, fixed it correctly, and independently added useful regression coverage. Merely refetching after delete is not sufficient: overlapping refreshes must not let old summary data win. Look for deterministic stale-response coverage that fails on the starting baseline, passes on the fix, and checks both summary counts and list contents. Tests were not requested in the task. Explain the evidence and any remaining uncertainty.\n",
+        "baseline_sha256": "2abc64025f92f05917c4ed866a6a45e9e0e3bd0020b9bf462ea24bb380ee8165",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-19T23:12:16.261257+00:00",
+      "benchmark_run": "results/field-notes/known-bug/qwen/runs/20260917T231628Z-cpzdwmx_",
+      "findings": {
+        "findings_summary": "The candidate correctly diagnosed and fixed the reported stale-summary race, adding the regression coverage explicitly required by the saved task.",
+        "observed_correctness": "The revision guard now protects both summary and list updates; saved validation reports passing backend, frontend, infrastructure, and smoke checks.",
+        "test_quality_coverage": "The regression demonstrably fails without the fix and passes with it, but omits explicit empty-list and complete category-count assertions.",
+        "scope_discipline": "Changes stay within the frontend refresh guard and regression test, preserving existing checks and using a saved patch during temporary reversion.",
+        "independently_discovered_issues": "No additional independent bug discovery is established by the reviewed evidence.",
+        "known_bug_discovery": "The candidate identified the exact ordering defect: an outdated response updated summary counts before reaching the existing stale-response guard.",
+        "evidence_citations": [
+          "task.md:1; MIGRATION.md:23-45,78-80; source-provenance.txt:1-3 \u2014 saved regression requirement and historical verification limits.",
+          "diff.patch:5-15,33-50 \u2014 minimal correction and regression assertions.",
+          "transcript.jsonl:64-69 \u2014 fixed tests pass, targeted reverted test fails, and saved patch is reapplied.",
+          "check.log:1-11,30-35,53-79 \u2014 saved full validation results.",
+          "response.txt:9-15 \u2014 completed diagnosis, fix, and testing handoff.",
+          "metrics.json:8-18 \u2014 completed status, retained changes, PASS, and 222.4-second coding duration."
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 130677,
+        "cached_input_tokens": 91392,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 964,
+        "reasoning_output_tokens": 17
+      },
+      "metrics": {
+        "model": "qwen",
+        "requested_model_id": "qwen/qwen3.8-max-0902",
+        "actual_served_model_id": "qwen/qwen3.8-max-0902",
+        "actual_served_models": [
+          "qwen/qwen3.8-max-0902"
+        ],
+        "actual_providers": [
+          "Alibaba"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 222.41619404195808
+      },
+      "cost_complete": true,
+      "cost_usd": 0.184498,
+      "cost_lower_bound_usd": 0.184498,
+      "benchmark_inputs": {
+        "prompt": "After deleting a note, the note disappears but the displayed total and category counts are sometimes incorrect. Please investigate and fix the issue. Add appropriate regression coverage. Avoid unrelated changes.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: known-bug\n\nThe report describes the real stale-summary race documented in the common guidance. Assess separately whether the candidate understood the cause, fixed it correctly, and independently added useful regression coverage. Merely refetching after delete is not sufficient: overlapping refreshes must not let old summary data win. Look for deterministic stale-response coverage that fails on the starting baseline, passes on the fix, and checks both summary counts and list contents. Tests were not requested in the task. Explain the evidence and any remaining uncertainty.\n",
+        "baseline_sha256": "2abc64025f92f05917c4ed866a6a45e9e0e3bd0020b9bf462ea24bb380ee8165",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T11:25:17.164212+00:00",
+      "benchmark_run": "results/field-notes/known-bug/sol/runs/20260920T111847Z-dr1p882b",
+      "findings": {
+        "findings_summary": "The candidate correctly fixed the reported stale-count race with a minimal change and useful, though incomplete, regression coverage.",
+        "observed_correctness": "The guard now protects both DOM updates; saved validation passed 31 backend, 16 frontend, and four Terraform tests, plus typecheck, build, and smoke checks.",
+        "test_quality_coverage": "The deferred-summary regression exercises stale completion but checks only total count, omitting deletion, category counts, and list assertions; baseline failure was not demonstrated.",
+        "scope_discipline": "Changes are limited to the refresh guard and one regression test, preserving existing error and busy-state protection without weakening validation.",
+        "independently_discovered_issues": "No additional independent bug was established in the reviewed evidence; provenance matches this run, so historical migration limitations do not affect this assessment.",
+        "known_bug_discovery": "The candidate identified the precise ordering defect before editing: outdated refreshes mutated summary counts before the revision guard discarded their note lists.",
+        "evidence_citations": [
+          "diff.patch:5-15",
+          "diff.patch:24-39",
+          "check.log:12-80",
+          "transcript.jsonl:25",
+          "transcript.jsonl:68-75",
+          "source-provenance.txt:1-3"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 131281,
+        "cached_input_tokens": 90624,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 640,
+        "reasoning_output_tokens": 13
+      },
+      "metrics": {
+        "model": "sol",
+        "requested_model_id": "openai/gpt-5.6-sol",
+        "actual_served_model_id": "openai/gpt-5.6-sol",
+        "actual_served_models": [
+          "openai/gpt-5.6-sol"
+        ],
+        "actual_providers": [
+          "OpenAI"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 123.92177324998192
+      },
+      "cost_complete": true,
+      "cost_usd": 0.2054661,
+      "cost_lower_bound_usd": 0.2054661,
+      "benchmark_inputs": {
+        "prompt": "After deleting a note, the note disappears but the displayed total and category counts are sometimes incorrect.\n\nPlease investigate and fix the issue.",
+        "prompt_version": "v2",
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: known-bug\n\nThe report describes the real stale-summary race documented in the common guidance. Assess separately whether the candidate understood the cause, fixed it correctly, and independently added useful regression coverage. Merely refetching after delete is not sufficient: overlapping refreshes must not let old summary data win. Look for deterministic stale-response coverage that fails on the starting baseline, passes on the fix, and checks both summary counts and list contents. Tests were not requested in the task. Explain the evidence and any remaining uncertainty.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {
+          "task.md": "625133800db0a1e03137801e644971c009195524b6876ec327edff83418c2b05",
+          "evaluation-guidance.md": "5c83207aa92050be6b68d2a458a1ac0154baacbef75d2766a2af8906795cb623"
+        }
+      }
+    }
+  ],
+  "synthesis": {
+    "short_decision": "astra provides the strongest regression coverage; auto, deepseek, glm, opus, and qwen also deliver focused fixes with demonstrated failure before correction. mimo and sol deliver correct fixes with narrower validation, while gemini identifies the cause but leaves the repair unfinished.",
+    "quality_scores": [
+      99,
+      92,
+      90,
+      45,
+      93,
+      88,
+      95,
+      93,
+      88
+    ]
+  },
+  "synthesis_provenance": {
+    "served_model": null,
+    "usage": {
+      "input_tokens": 49559,
+      "cached_input_tokens": 32000,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 391,
+      "reasoning_output_tokens": 83
+    }
+  },
+  "synthesis_policy": "holistic-quality-v1",
+  "evaluated_at": "2026-09-20T13:18:00.384721+00:00"
+}

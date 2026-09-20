@@ -1,0 +1,837 @@
+{
+  "state_version": 1,
+  "schema_version": 3,
+  "status": "completed",
+  "identity": {
+    "config": {
+      "backend": "codex",
+      "model": null,
+      "timeout": 900,
+      "reasoning_effort": "low"
+    },
+    "runs": [
+      {
+        "path": "results/field-notes/note-limit/astra/runs/20260919T113343Z-q5c6gost",
+        "evidence_sha256": "e3f19d0251244106b610aad664236ace2f539fcf85ebf9bd9c9d2e006f9bb13d"
+      },
+      {
+        "path": "results/field-notes/note-limit/auto/runs/20260919T094401Z-4j2wc3pw",
+        "evidence_sha256": "9a2a66031766b6c178a399e0836d82b673ae1529c7af9b74693baaa4b3b08934"
+      },
+      {
+        "path": "results/field-notes/note-limit/deepseek/runs/20260919T094946Z-pxk08hqj",
+        "evidence_sha256": "fdb455e17687f33481f3091d16f2551e5512a7281abe9456642d6a3b5e81277f"
+      },
+      {
+        "path": "results/field-notes/note-limit/gemini/runs/20260919T095743Z-sm85p5_2",
+        "evidence_sha256": "eeec2bf1dce7171232f24b2438ba6c2d1ad35a354fbf11e710c63da13ed568b1"
+      },
+      {
+        "path": "results/field-notes/note-limit/glm/runs/20260919T101246Z-153j6cnz",
+        "evidence_sha256": "75a21b184c12834efda4ee02e7d0d8f9ff6d8819dd78ab926baa8ddd2edbf2a9"
+      },
+      {
+        "path": "results/field-notes/note-limit/kimi/runs/20260919T102757Z-p7bug1i0",
+        "evidence_sha256": "776934ea3aa0633ac356fbf8d80d6e09fe77b0d74de62f58bb0b38bacdf47a42"
+      },
+      {
+        "path": "results/field-notes/note-limit/mimo/runs/20260919T103711Z-bdr2bwra",
+        "evidence_sha256": "5479a869a6c02bd5e38c73bb9f5f46608b2f183c1d5dc875dccc28c76e2b75c6"
+      },
+      {
+        "path": "results/field-notes/note-limit/minimax/runs/20260919T104202Z-1f16i5j4",
+        "evidence_sha256": "3a14cfa45f8e2a308d3cd04efc0fe84a2ffe08d8648fbf9779c22ed6483f91f2"
+      },
+      {
+        "path": "results/field-notes/note-limit/opus/runs/20260919T121700Z-cafnbtkz",
+        "evidence_sha256": "7d24b53b3da465e35d1655459e03e673edc82fa45881360eacb6b9b89fb6726f"
+      },
+      {
+        "path": "results/field-notes/note-limit/qwen/runs/20260919T111222Z-g6q35786",
+        "evidence_sha256": "446dd7c0ecedefae7c061ee16e0c1671afe4ffb1f85e115bf6058313eed03566"
+      },
+      {
+        "path": "results/field-notes/note-limit/qwen-flash/runs/20260919T105712Z-x1dinopv",
+        "evidence_sha256": "8bbfa797861407148dba635326f247ac0812bbd320b7fcc75b2e0c5039d66e92"
+      },
+      {
+        "path": "results/field-notes/note-limit/sol/runs/20260919T112731Z-p2vmylf_",
+        "evidence_sha256": "dba1dbc1065eb142d77cfbece1bfa9189cb4fb1a980bcf57ca86ce5f7fe69306"
+      },
+      {
+        "path": "results/field-notes/note-limit/sonnet/runs/20260919T120123Z-x70xn36c",
+        "evidence_sha256": "7d91e661efa5814c2f96fcde86618e6e0eb3107d637b7cbc97f42a53a499557e"
+      }
+    ]
+  },
+  "config": {
+    "backend": "codex",
+    "model": null,
+    "timeout": 900,
+    "reasoning_effort": "low"
+  },
+  "runs": [
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:03:47.298795+00:00",
+      "benchmark_run": "results/field-notes/note-limit/astra/runs/20260919T113343Z-q5c6gost",
+      "findings": {
+        "findings_summary": "The implementation appears to satisfy the saved note-limit task across all three layers; baseline provenance is verified, but historical guidance remains unverified.",
+        "observed_correctness": "Saved validation passed 49 backend, 21 frontend, and nine Terraform tests, plus build and smoke checks; distributed enforcement is explicitly excluded.",
+        "test_quality_coverage": "Added tests cover configuration, persistence modes, capacity boundaries, deletion recovery, rejected drafts, and response ordering; concurrency coverage uses timing, and category-count assertions remain incomplete.",
+        "scope_discipline": "Changes remain focused on the feature, supporting documentation, and tests, with no dependency additions or validation weakening visible in the patch.",
+        "independently_discovered_issues": "The candidate anticipated filtered-count mistakes, lowered limits, stale browser capacity, and concurrent creation, adding safeguards and documenting the single-process constraint.",
+        "known_bug_discovery": "The patch fixes the pre-existing stale-summary race and adds a total-count regression assertion, although explicit recognition of the original defect remains unestablished.",
+        "evidence_citations": [
+          "task.md:1-7; source-provenance.txt:1-3",
+          "check.log:12-85",
+          "diff.patch:26-34,174-186,695-710",
+          "diff.patch:217-298,337-417",
+          "diff.patch:549-650",
+          "baseline.tar:frontend/src/app.ts:35-41; diff.patch:422-437; transcript.jsonl:120,139"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 231584,
+        "cached_input_tokens": 173312,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 897,
+        "reasoning_output_tokens": 58
+      },
+      "metrics": {
+        "model": "astra",
+        "requested_model_id": "~openai/gpt-astra-latest",
+        "actual_served_model_id": "openai/gpt-6-astra",
+        "actual_served_models": [
+          "openai/gpt-6-astra"
+        ],
+        "actual_providers": [
+          "OpenAI"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 340.97366745886393
+      },
+      "cost_complete": true,
+      "cost_usd": 3.2672895,
+      "cost_lower_bound_usd": 3.2672895,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:04:37.420988+00:00",
+      "benchmark_run": "results/field-notes/note-limit/auto/runs/20260919T094401Z-4j2wc3pw",
+      "findings": {
+        "findings_summary": "The feature spans all required layers, but frontend prevention fails after filling the last slot because submission cleanup re-enables the button.",
+        "observed_correctness": "Sequential backend enforcement and unlimited defaults are implemented; saved validation passed 37 backend, 18 frontend, and six Terraform tests plus release smoke.",
+        "test_quality_coverage": "Added tests cover rejection, deletion recovery, configuration, and isolated button states, but miss the complete frontend save-to-capacity lifecycle and response ordering.",
+        "scope_discipline": "Changes remain feature-focused without weakening checks; the baseline is historically verified, while guidance is current-only and historically unverified.",
+        "independently_discovered_issues": "Source review additionally finds Terraform accepts fractional limits that backend parsing rejects; candidate recognition of this inconsistency is not established.",
+        "known_bug_discovery": "Discovery of the existing stale-summary race is unestablished; placing capacity updates before the revision guard extends its effects to creation availability.",
+        "evidence_citations": [
+          "diff.patch:275-291, 336-352; baseline.tar:frontend/src/components/note-form.ts:29-37",
+          "check.log:12, 35-36, 66, 82",
+          "diff.patch:239-266, 393-443",
+          "source-provenance.txt:1-3",
+          "diff.patch:26-30, 542-548",
+          "transcript.jsonl:277-281, 289"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 152855,
+        "cached_input_tokens": 113920,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 731,
+        "reasoning_output_tokens": 16
+      },
+      "metrics": {
+        "model": "auto",
+        "requested_model_id": "openrouter/auto-beta",
+        "actual_served_model_id": "deepseek/deepseek-v4-flash",
+        "actual_served_models": [
+          "deepseek/deepseek-v4-flash"
+        ],
+        "actual_providers": [
+          "Alibaba"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 334.4926004158333
+      },
+      "cost_complete": true,
+      "cost_usd": 0.0969241564,
+      "cost_lower_bound_usd": 0.0969241564,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:05:19.537891+00:00",
+      "benchmark_run": "results/field-notes/note-limit/deepseek/runs/20260919T094946Z-pxk08hqj",
+      "findings": {
+        "findings_summary": "The requested feature is substantially implemented, but Terraform accepts fractional limits that backend parsing rejects, creating a configuration failure despite passing validation.",
+        "observed_correctness": "Source review supports global-count enforcement, unlimited defaults, deletion recovery, and guarded frontend capacity updates; saved validation passed 35 backend, 18 frontend, and six Terraform tests.",
+        "test_quality_coverage": "Added tests cover rejection, configuration, capacity display, and service recovery, but omit fractional Terraform values, concurrent creation, and capacity response ordering.",
+        "scope_discipline": "Changes remain focused on the feature, documentation, and tests without weakening checks; baseline provenance is verified, while historical guidance remains unverified.",
+        "independently_discovered_issues": "Review identified the fractional-value mismatch; candidate reasoning mentions atomicity, but the separate count and insertion remain unprotected and the handoff documents no concurrency limitation.",
+        "known_bug_discovery": "Discovery of the pre-existing stale-summary race is unestablished: summary updates remain before the revision guard, although new capacity updates correctly follow it.",
+        "evidence_citations": [
+          "task.md:1-7; source-provenance.txt:1-3",
+          "diff.patch:57-61,453-460,525-532 \u2014 fractional Terraform values reach integer-only backend parsing.",
+          "diff.patch:160-165,247-256,261-280 \u2014 enforcement, deletion recovery, and response-ordering placement.",
+          "diff.patch:193-224,390-425,497-513 \u2014 added feature tests.",
+          "check.log:12,31-36,61-66,80-82 \u2014 saved passing validation and release smoke.",
+          "transcript.jsonl:50,196,199-204 \u2014 atomicity consideration, completed checks, and final handoff."
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 161616,
+        "cached_input_tokens": 117760,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 821,
+        "reasoning_output_tokens": 11
+      },
+      "metrics": {
+        "model": "deepseek",
+        "requested_model_id": "deepseek/deepseek-v4.1-flash",
+        "actual_served_model_id": "deepseek/deepseek-v4.1-flash",
+        "actual_served_models": [
+          "deepseek/deepseek-v4.1-flash"
+        ],
+        "actual_providers": [
+          "DeepInfra",
+          "Relace"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 467.97654612502083
+      },
+      "cost_complete": true,
+      "cost_usd": 0.03920828,
+      "cost_lower_bound_usd": 0.03920828,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:06:04.413077+00:00",
+      "benchmark_run": "results/field-notes/note-limit/gemini/runs/20260919T095743Z-sm85p5_2",
+      "findings": {
+        "findings_summary": "The timed-out attempt leaves the feature incomplete: Terraform and backend changes exist, but required frontend limit display and creation prevention are absent.",
+        "observed_correctness": "Saved validation fails on syntax errors in backend configuration and API tests, preventing application startup and successful verification.",
+        "test_quality_coverage": "Six Terraform tests passed; added backend tests cover rejection, deletion recovery, configuration, and Azure counting, but frontend coverage is absent and final checks fail.",
+        "scope_discipline": "The configuration rewrite unnecessarily replaces existing conventions, weakens Azure validation, and changes storage-container and static-directory defaults.",
+        "independently_discovered_issues": "Review additionally identifies an unprotected count-then-create race; candidate recognition is unestablished, and strict concurrent enforcement was not explicitly required.",
+        "known_bug_discovery": "The existing stale-summary race remains unchanged, with discovery unknown; baseline provenance is verified, while historical guidance is unverified.",
+        "evidence_citations": [
+          "task.md:1-7; diff-stat.txt:1-14; metrics.json:14-20",
+          "check.log:2-39",
+          "transcript.jsonl:190; diff.patch:270-287,301-325,330-383",
+          "diff.patch:19-105,223-233",
+          "baseline.tar:frontend/src/app.ts:35-41; source-provenance.txt:1-3",
+          "transcript.jsonl:231-235,350-355; response.txt:26-39"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 161088,
+        "cached_input_tokens": 119552,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 819,
+        "reasoning_output_tokens": 29
+      },
+      "metrics": {
+        "model": "gemini",
+        "requested_model_id": "google/gemini-3.8-flash",
+        "actual_served_model_id": null,
+        "actual_served_models": [
+          "google/gemini-3.8-flash"
+        ],
+        "actual_providers": [
+          "Google"
+        ],
+        "status": "timed-out",
+        "timeout": true,
+        "validation": "FAIL",
+        "coding_duration_seconds": 900.0338831669651
+      },
+      "cost_complete": false,
+      "cost_usd": null,
+      "cost_lower_bound_usd": 1.4856478499999999,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:07:05.670534+00:00",
+      "benchmark_run": "results/field-notes/note-limit/glm/runs/20260919T101246Z-153j6cnz",
+      "findings": {
+        "findings_summary": "The implementation covers the requested layers, but stale responses can incorrectly enable or disable creation despite passing saved validation.",
+        "observed_correctness": "Terraform propagation, unlimited defaults, and sequential backend rejection appear correct; saved checks passed 39 backend, 19 frontend, six Terraform tests, and release smoke.",
+        "test_quality_coverage": "Added tests cover configuration and capacity boundaries, but omit response ordering and concurrency; the deletion-labelled frontend test only changes mocks and submits filters.",
+        "scope_discipline": "Changes remain feature-focused without dependency additions or weakened checks; execution timed out before a final handoff, and historical guidance is unverified.",
+        "independently_discovered_issues": "The candidate recognized non-atomic check-then-create enforcement but accepted it without safeguards; concurrent requests can exceed capacity.",
+        "known_bug_discovery": "Transcript reasoning explicitly identifies the existing stale-summary race, then deliberately preserves it and extends its effects to the creation button without regression coverage.",
+        "evidence_citations": [
+          "task.md:1-7; source-provenance.txt:1-3",
+          "diff.patch:232-237,378-392,661-669",
+          "check.log:12,31-36,57-66,82",
+          "diff.patch:535-551",
+          "transcript.jsonl:68",
+          "metrics.json:9-15; response.txt:67-71"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 278228,
+        "cached_input_tokens": 233472,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 961,
+        "reasoning_output_tokens": 14
+      },
+      "metrics": {
+        "model": "glm",
+        "requested_model_id": "z-ai/glm-5.3-flash",
+        "actual_served_model_id": "z-ai/glm-5.3-flash",
+        "actual_served_models": [
+          "z-ai/glm-5.3-flash"
+        ],
+        "actual_providers": [
+          "Relace"
+        ],
+        "status": "timed-out",
+        "timeout": true,
+        "validation": "PASS",
+        "coding_duration_seconds": 900.0145670829806
+      },
+      "cost_complete": true,
+      "cost_usd": 0.0762933,
+      "cost_lower_bound_usd": 0.0762933,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:07:56.046386+00:00",
+      "benchmark_run": "results/field-notes/note-limit/kimi/runs/20260919T102757Z-p7bug1i0",
+      "findings": {
+        "findings_summary": "The requested feature works in ordinary flows across Terraform, backend, and frontend; review found concurrency weaknesses beyond the passing validation.",
+        "observed_correctness": "Configuration defaults to unlimited, backend checks global capacity, and frontend blocks full notebooks; concurrent backend creation remains non-atomic.",
+        "test_quality_coverage": "Saved validation passed 37 backend, 18 frontend, six Terraform tests and release smoke; added coverage lacks concurrent creation and stale-response regressions.",
+        "scope_discipline": "Changes remain feature-focused without weakened checks; assessment uses the saved task and verified baseline, while current guidance has unverified historical provenance.",
+        "independently_discovered_issues": "Review identifies that setFull(false) can re-enable submission during an ongoing save, permitting duplicate requests; this behavior lacks a regression test.",
+        "known_bug_discovery": "The candidate explicitly recognized the pre-existing stale-summary race but deliberately retained it, protecting only the new capacity state from outdated responses.",
+        "evidence_citations": [
+          "task.md:1-7; source-provenance.txt:1-3",
+          "diff.patch:95-115, 169-176, 534-542, 604-611",
+          "check.log:2-12, 31-36, 56-82",
+          "diff.patch:203-213, 417-447",
+          "diff.patch:363-379; baseline.tar:frontend/src/components/note-form.ts:21-37",
+          "transcript.jsonl:59; diff.patch:289-298"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 258995,
+        "cached_input_tokens": 211712,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 936,
+        "reasoning_output_tokens": 25
+      },
+      "metrics": {
+        "model": "kimi",
+        "requested_model_id": "moonshotai/kimi-k3",
+        "actual_served_model_id": "moonshotai/kimi-k3",
+        "actual_served_models": [
+          "moonshotai/kimi-k3"
+        ],
+        "actual_providers": [
+          "DigitalOcean",
+          "Together"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 545.4024602919817
+      },
+      "cost_complete": true,
+      "cost_usd": 1.17427305,
+      "cost_lower_bound_usd": 1.17427305,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:08:34.702585+00:00",
+      "benchmark_run": "results/field-notes/note-limit/mimo/runs/20260919T103711Z-bdr2bwra",
+      "findings": {
+        "findings_summary": "The requested limit works across layers in ordinary use, but review identifies draft loss during refresh and incomplete Terraform validation.",
+        "observed_correctness": "Saved validation passed 38 backend, 18 frontend and five Terraform tests, plus release smoke; source supports global capacity checks and unlimited defaults.",
+        "test_quality_coverage": "Added tests cover rejection, deletion recovery, defaults and component rendering, but omit application capacity transitions, draft preservation, fractional configuration and concurrent creation.",
+        "scope_discipline": "Changes remain feature-focused without weakened checks; the baseline hash is verified, while current guidance has unverified historical provenance.",
+        "independently_discovered_issues": "Review finds refresh replaces unsaved drafts, while Terraform accepts fractional limits that backend integer parsing rejects; candidate recognition of these issues is unestablished.",
+        "known_bug_discovery": "The pre-existing stale-summary race remains without demonstrated discovery or regression coverage, although new capacity updates occur after the revision guard.",
+        "evidence_citations": [
+          "task.md:1-7",
+          "diff.patch:26,135-140,257-281,298-315,385-409,488-495",
+          "check.log:12,36,65,81",
+          "source-provenance.txt:1-3",
+          "baseline.tar:frontend/src/app.ts:36-45",
+          "transcript.jsonl:260-272,281"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 135808,
+        "cached_input_tokens": 94976,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 723,
+        "reasoning_output_tokens": 14
+      },
+      "metrics": {
+        "model": "mimo",
+        "requested_model_id": "xiaomi/mimo-v2.5",
+        "actual_served_model_id": "xiaomi/mimo-v2.5",
+        "actual_served_models": [
+          "xiaomi/mimo-v2.5"
+        ],
+        "actual_providers": [
+          "Xiaomi"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 280.21439216611907
+      },
+      "cost_complete": true,
+      "cost_usd": 0.021828004800000002,
+      "cost_lower_bound_usd": 0.021828004800000002,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:09:29.366369+00:00",
+      "benchmark_run": "results/field-notes/note-limit/minimax/runs/20260919T104202Z-1f16i5j4",
+      "findings": {
+        "findings_summary": "The feature spans all requested layers, but stale responses can corrupt capacity controls and Terraform accepts fractional limits that prevent backend startup.",
+        "observed_correctness": "Saved validation passed 39 backend, 18 frontend, and six Terraform tests plus release smoke; the run timed out with an empty final response.",
+        "test_quality_coverage": "Added tests cover limits, rejection, defaults, deletion recovery, and wiring, but omit fractional configuration, concurrent creation, and outdated capacity responses.",
+        "scope_discipline": "Changes remain feature-focused without weakened checks; provenance verifies the historical baseline and saved prompt, while current guidance\u2019s historical applicability remains unverified.",
+        "independently_discovered_issues": "The candidate recognized concurrent check-then-create overshoot but accepted it without safeguards; review additionally found Terraform\u2019s integer-validation claim inconsistent with its numeric constraint.",
+        "known_bug_discovery": "The candidate considered outdated totals but incorrectly dismissed the race, leaving the known summary defect intact and extending its effects to creation availability.",
+        "evidence_citations": [
+          "diff.patch:61-67, 179-184, 579-587, 656-663",
+          "check.log:12, 31-36, 56-82; metrics.json:9-15; response.txt (empty)",
+          "diff.patch:212-233, 252-266, 294-312, 479-495, 528-548",
+          "source-provenance.txt:1-3; task.md:1-7",
+          "transcript.jsonl:63",
+          "transcript.jsonl:342; diff.patch:339-348; baseline.tar:frontend/src/app.ts:36-41"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 202495,
+        "cached_input_tokens": 156672,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 884,
+        "reasoning_output_tokens": 14
+      },
+      "metrics": {
+        "model": "minimax",
+        "requested_model_id": "minimax/minimax-m3",
+        "actual_served_model_id": "minimax/minimax-m3",
+        "actual_served_models": [
+          "minimax/minimax-m3"
+        ],
+        "actual_providers": [
+          "CoreWeave",
+          "Together",
+          "Venice"
+        ],
+        "status": "timed-out",
+        "timeout": true,
+        "validation": "PASS",
+        "coding_duration_seconds": 900.0452393749729
+      },
+      "cost_complete": false,
+      "cost_usd": null,
+      "cost_lower_bound_usd": 0.64797126,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:10:17.553448+00:00",
+      "benchmark_run": "results/field-notes/note-limit/opus/runs/20260919T121700Z-cafnbtkz",
+      "findings": {
+        "findings_summary": "The feature spans Terraform, backend, and frontend, but stale responses can incorrectly enable creation at capacity or block it after deletion.",
+        "observed_correctness": "Sequential backend enforcement and unlimited defaults appear correct; saved validation passed 40 backend, 17 frontend, seven Terraform tests, and release smoke.",
+        "test_quality_coverage": "Added tests cover configuration, rejection, and restored capacity, but omit overlapping refreshes and submissions; existing response-ordering coverage checks only note text.",
+        "scope_discipline": "Changes remain focused without weakening checks; review uses the verified historical baseline and matching saved task, while current guidance lacks historical verification.",
+        "independently_discovered_issues": "The candidate documented non-atomic enforcement; review additionally finds that refreshing counts can re-enable submission during an outstanding save, permitting duplicate requests.",
+        "known_bug_discovery": "Discovery is unestablished: the pre-existing stale-summary race remains, and the new capacity update also executes before the revision guard.",
+        "evidence_citations": [
+          "diff.patch:386-407 \u2014 capacity updates precede the revision guard.",
+          "diff.patch:448-465 \u2014 count refreshes overwrite the submit button's disabled state.",
+          "check.log:12-83 \u2014 saved test totals, Terraform validation, build, and release smoke success.",
+          "baseline.tar:frontend/tests/app.test.ts:52-65 \u2014 existing ordering test asserts note text only.",
+          "source-provenance.txt:1-3 \u2014 task correspondence, unverified historical guidance, and verified baseline.",
+          "transcript.jsonl:262 \u2014 final handoff explicitly documents concurrent enforcement limitations."
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 214626,
+        "cached_input_tokens": 161792,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 904,
+        "reasoning_output_tokens": 28
+      },
+      "metrics": {
+        "model": "opus",
+        "requested_model_id": "anthropic/claude-opus-5",
+        "actual_served_model_id": "anthropic/claude-opus-5",
+        "actual_served_models": [
+          "anthropic/claude-opus-5"
+        ],
+        "actual_providers": [
+          "Claude Platform on AWS"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 720.5155419998337
+      },
+      "cost_complete": true,
+      "cost_usd": 4.645082,
+      "cost_lower_bound_usd": 4.645082,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:11:14.543775+00:00",
+      "benchmark_run": "results/field-notes/note-limit/qwen/runs/20260919T111222Z-g6q35786",
+      "findings": {
+        "findings_summary": "The requested feature is substantially implemented across all layers, although the run timed out without a completed handoff.",
+        "observed_correctness": "Saved validation passed 41 backend tests, 19 frontend tests, seven Terraform tests, and release smoke; source supports optional limits and creation recovery after deletion.",
+        "test_quality_coverage": "Added tests cover configuration, capacity boundaries, deletion recovery, defaults, and wiring, but omit concurrent creation, stale responses, and cross-tab capacity recovery.",
+        "scope_discipline": "Changes remain feature-focused without weakening checks; baseline provenance is verified, while current guidance has unverified historical provenance.",
+        "independently_discovered_issues": "The candidate recognized non-atomic enforcement but accepted it without safeguards; concurrent requests can exceed capacity, and rejected submissions do not refresh capacity.",
+        "known_bug_discovery": "The candidate explicitly identified the existing stale-summary race, preserved it, and guarded new capacity updates; no regression test demonstrates the discovery.",
+        "evidence_citations": [
+          "metrics.json:9-19",
+          "check.log:12-83",
+          "diff.patch:213-295,441-524,585-639",
+          "source-provenance.txt:1-3",
+          "transcript.jsonl:103,116",
+          "diff.patch:182-186,304-317,394-403"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 253311,
+        "cached_input_tokens": 205056,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1027,
+        "reasoning_output_tokens": 30
+      },
+      "metrics": {
+        "model": "qwen",
+        "requested_model_id": "qwen/qwen3.8-max-0902",
+        "actual_served_model_id": null,
+        "actual_served_models": [
+          "qwen/qwen3.8-max-0902"
+        ],
+        "actual_providers": [
+          "Alibaba"
+        ],
+        "status": "timed-out",
+        "timeout": true,
+        "validation": "PASS",
+        "coding_duration_seconds": 900.0488897499163
+      },
+      "cost_complete": false,
+      "cost_usd": null,
+      "cost_lower_bound_usd": 0.785768,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:11:56.351736+00:00",
+      "benchmark_run": "results/field-notes/note-limit/qwen-flash/runs/20260919T105712Z-x1dinopv",
+      "findings": {
+        "findings_summary": "The feature spans Terraform, backend, and frontend, but stale responses can incorrectly change creation availability; the run timed out before a final handoff.",
+        "observed_correctness": "Source review supports optional unlimited defaults and sequential backend enforcement across storage modes; saved validation passed 37 backend, 18 frontend, and seven Terraform tests.",
+        "test_quality_coverage": "Added tests cover configuration, rejection, deletion recovery, and infrastructure wiring, but omit capacity response ordering and concurrent creation.",
+        "scope_discipline": "Changes remain focused on the saved feature request without weakening checks; baseline provenance is verified, while historical guidance is unverified.",
+        "independently_discovered_issues": "Review identified non-atomic count-then-create enforcement and capacity updates that can re-enable submission during a pending save; candidate recognition is not established.",
+        "known_bug_discovery": "Discovery of the existing stale-summary race is unknown; it remains unfixed and now also affects form capacity because updates precede the revision guard.",
+        "evidence_citations": [
+          "diff.patch:96-179, 539-547, 615-625",
+          "diff.patch:298-318, 368-389",
+          "diff.patch:208-219, 433-456, 577-602",
+          "check.log:12-83",
+          "source-provenance.txt:1-3",
+          "metrics.json:9-15; transcript.jsonl:209-216"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 155815,
+        "cached_input_tokens": 94080,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 786,
+        "reasoning_output_tokens": 13
+      },
+      "metrics": {
+        "model": "qwen-flash",
+        "requested_model_id": "qwen/qwen3.8-flash",
+        "actual_served_model_id": null,
+        "actual_served_models": [
+          "qwen/qwen3.8-flash"
+        ],
+        "actual_providers": [
+          "Alibaba"
+        ],
+        "status": "timed-out",
+        "timeout": true,
+        "validation": "PASS",
+        "coding_duration_seconds": 900.0510777079035
+      },
+      "cost_complete": false,
+      "cost_usd": null,
+      "cost_lower_bound_usd": 0.063859944,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:12:37.812179+00:00",
+      "benchmark_run": "results/field-notes/note-limit/sol/runs/20260919T112731Z-p2vmylf_",
+      "findings": {
+        "findings_summary": "The requested note-limit feature is implemented end-to-end with unlimited defaults; source review identifies a remaining frontend submission-state race.",
+        "observed_correctness": "Saved validation passed 36 backend, 16 frontend, and five Terraform tests, plus build and smoke checks; baseline provenance is verified, historical guidance unverified.",
+        "test_quality_coverage": "Added tests cover configuration, rejection, deletion freeing capacity, full-form blocking, and Terraform wiring, but omit concurrent submissions and frontend capacity transitions.",
+        "scope_discipline": "Changes remain focused on configuration, enforcement, presentation, and relevant tests, with no added dependencies or weakened validation.",
+        "independently_discovered_issues": "The candidate anticipated process-local creation races; review additionally finds that a filter refresh can re-enable submission during an outstanding save, allowing duplicate requests.",
+        "known_bug_discovery": "Discovery of the pre-existing stale-summary race is unestablished; it remains unfixed, while the new capacity update correctly follows the revision guard.",
+        "evidence_citations": [
+          "task.md:1-7",
+          "diff.patch:140-148, 268-334, 355-365, 390-460",
+          "check.log:12, 35-36, 65-81",
+          "source-provenance.txt:1-3",
+          "transcript.jsonl:47, 163-172, 179",
+          "baseline.tar:frontend/src/components/note-form.ts:21-37"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 160937,
+        "cached_input_tokens": 117888,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 769,
+        "reasoning_output_tokens": 23
+      },
+      "metrics": {
+        "model": "sol",
+        "requested_model_id": "openai/gpt-5.6-sol",
+        "actual_served_model_id": "openai/gpt-5.6-sol",
+        "actual_served_models": [
+          "openai/gpt-5.6-sol"
+        ],
+        "actual_providers": [
+          "OpenAI"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 362.75911254109815
+      },
+      "cost_complete": true,
+      "cost_usd": 0.6988958,
+      "cost_lower_bound_usd": 0.6988958,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    },
+    {
+      "schema_version": 3,
+      "backend": "codex",
+      "evaluator_model": "codex-default",
+      "evaluated_at": "2026-09-20T02:13:22.050128+00:00",
+      "benchmark_run": "results/field-notes/note-limit/sonnet/runs/20260919T120123Z-x70xn36c",
+      "findings": {
+        "findings_summary": "The requested feature works for ordinary sequential use across all three layers, with concurrency and frontend submission-state limitations.",
+        "observed_correctness": "Saved validation passes 39 backend, 20 frontend and seven Terraform tests; source review supports global-count enforcement, deletion recovery and unlimited defaults.",
+        "test_quality_coverage": "Added tests cover boundaries, configuration and wiring, but omit concurrent creation, stale capacity, filtered totals and integrated frontend recovery after deletion.",
+        "scope_discipline": "Changes remain focused without weakened checks; the baseline is historically verified, while current guidance has unverified historical provenance.",
+        "independently_discovered_issues": "Review identifies non-atomic backend enforcement and availability refreshes potentially enabling duplicate submissions during an outstanding save; neither limitation is documented by the candidate.",
+        "known_bug_discovery": "Discovery of the pre-existing stale-summary race is unestablished; it remains unfixed, although the new capacity update correctly follows the revision guard.",
+        "evidence_citations": [
+          "task.md:1-7; source-provenance.txt:1-3",
+          "diff.patch:53-92, 133-138, 481-489, 564-571",
+          "check.log:12, 35-36, 67, 83",
+          "diff.patch:166-177, 241-266, 384-449",
+          "diff.patch:340-359; baseline.tar:backend/src/fieldnotes/repository.py:28-43",
+          "baseline.tar:frontend/src/app.ts:36-45; diff.patch:284-291; transcript.jsonl:400-405"
+        ]
+      },
+      "served_model": null,
+      "usage": {
+        "input_tokens": 158411,
+        "cached_input_tokens": 119040,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 800,
+        "reasoning_output_tokens": 13
+      },
+      "metrics": {
+        "model": "sonnet",
+        "requested_model_id": "anthropic/claude-sonnet-5",
+        "actual_served_model_id": "anthropic/claude-sonnet-5",
+        "actual_served_models": [
+          "anthropic/claude-sonnet-5"
+        ],
+        "actual_providers": [
+          "Claude Platform on AWS"
+        ],
+        "status": "completed",
+        "timeout": false,
+        "validation": "PASS",
+        "coding_duration_seconds": 858.1724756660406
+      },
+      "cost_complete": true,
+      "cost_usd": 2.5790876,
+      "cost_lower_bound_usd": 2.5790876,
+      "benchmark_inputs": {
+        "prompt": "Add support for a configurable maximum number of notes.\n\nThe limit must be configurable from the Terraform dev environment and enforced by the backend.\n\nThe frontend should show users the configured limit and prevent creating another note when the limit has been reached.\n\nThe application must continue to work when no explicit limit is configured.",
+        "prompt_version": null,
+        "evaluation_guidance": "# Private benchmark guidance: stale summary\n\nThis file must never enter the candidate workspace or prompt.\n\nThe baseline deliberately preserves the stale-summary race in `frontend/src/app.ts`, inside `refresh()`. After `Promise.all` returns, `summary.textContent` is assigned before `if (current !== revision) return`. An older request can therefore overwrite current total/category counts while its outdated note list is correctly discarded. Backend deletion is not the cause.\n\nThe known correct minimal fix moves the revision guard immediately after the await, before either summary or list DOM mutations. Preserve the existing error and busy-state guards. Equivalent complete stale-response protection is valid.\n\nDeterministic reproduction (no network or sleeps): mount with one work note; start a filter refresh A with deferred list and summary promises; delete the visible note, allowing refresh B to finish with an empty list and zero counts; then resolve A with the pre-deletion note and counts. The list stays empty but the summary returns to one total and one work note. The benchmark-only `checks/reproduce.test.ts` (relative to the scenario directory) implements this ordering and asserts the defective outcome. Run it only in a disposable baseline copy, never in candidate preparation.\n\nA strong candidate regression test controls deferred promises, asserts the newer list AND every relevant count survive the older completion, and fails against this baseline while passing the correction. Existing \"ignores outdated filter responses\" coverage only checks note text, so it misses the summary corruption. Also consider stale errors/busy state and ordinary create/delete behavior.\n\nCompare discovery with the actual saved task, not the default task. For false or unrelated reports, report whether the candidate independently identified this race, cite diff/response/test evidence, and distinguish discovery from fixing it. If evidence cannot establish discovery, say unknown; do not infer discovery just from passing checks. Assess requested behavior, test quality, scope, and any other independently found issues. Check whether validation scripts/tests were weakened. The task intentionally does not request tests. Missing regression coverage is an observation to assess, not permission to alter candidate output.\n\n\n# Task evaluation: note-limit\n\nThe feature is deliberately underspecified. Accept reasonable, clearly explained engineering choices rather than requiring one implementation or an invented API contract. Assess requested feature completeness separately from independently anticipated edge cases and engineering judgment. The private cases below are not additional requirements disclosed to the candidate: do not turn every unhandled case into an automatic failure or reward unnecessary complexity.\n\n## Requested feature completeness\n\n- Terraform dev configuration, sensible defaults and validation of invalid limits.\n- Propagation through module inputs/app settings and backend configuration.\n- Backend enforcement for creation, including consistency across persistence modes. Frontend-only enforcement does not satisfy the task.\n- API behavior at the limit, useful errors, and continued read/delete access.\n- Frontend presentation of the configured limit and prevention of creation when full, including reaching capacity and freeing space.\n- Backward-compatible behavior when no explicit limit is configured.\n- Agreement on units, values, defaults and semantics across all three layers. Accept reasonable documented choices where the prompt leaves semantics open.\n\n## Independent anticipation and robustness\n\nUse these cases to distinguish a straightforward implementation from one that anticipates real use. For each relevant case, distinguish explicit recognition in the response or tests, handling visible in the implementation, a documented limitation, and an unaddressed or unknown case. Correct behavior alone does not prove that the candidate consciously identified the issue. Explain practical impact rather than treating this as an all-or-nothing checklist. If a case reveals a direct failure of the requested feature, report that failure under feature completeness as well, without double-counting it.\n\n- Global versus filtered counts: does the implementation use the collection total rather than the visible list length? Consider a full collection with zero search results or a category showing only some notes. Filtering should not bypass backend enforcement or misleadingly restore frontend capacity.\n- Lowering the limit below the existing count: does the candidate preserve data and read/delete access, block creation at or above the limit, and enable creation only after enough space is freed? For example, with five existing notes and a new limit of three, robust behavior blocks creation at counts five, four and three, and allows it at two. Distinguish a justified configuration policy from accidental equality-only checks or destructive behavior.\n- Stale capacity in another browser tab: if another tab has already used the last slot, does backend enforcement still hold? Does the frontend handle rejection with a useful message, preserve entered form values, and recover its capacity state without a page reload? Backend enforcement is required; these additional recovery behaviors distinguish robustness. Do not require live cross-tab synchronization or prescribe a particular HTTP status code.\n- Out-of-order responses: can earlier refreshes overwrite newer counts or creation state? Consider both an older full response arriving after deletion frees space and an older spare-capacity response arriving after the collection becomes full. Inspect all relevant state updates, not just the rendered note list.\n- Concurrent check-then-create races: does the candidate notice them and accurately explain the practical guarantees across persistence modes? Strict atomic enforcement across multiple backend instances is not an explicit requirement. Credit proportionate safeguards and honest limitations; unsupported claims of atomic enforcement count against engineering judgment.\n- Pre-existing stale-summary race: does the candidate independently identify it, and does it fix or test it? The prompt does not disclose this defect or explicitly request response-ordering protection. Report discovery separately from feature completeness; an equivalent protective restructuring is valid but does not alone establish conscious discovery. Do not mistake the existing bug for a newly introduced one or automatically fail the feature solely for leaving it untouched. Explain if the chosen limit UI relies on stale state and consequently fails the requested behavior.\n\n## Tests and evidence\n\nAssess independently added tests for boundaries, invalid configuration, omitted limits, backend rejection, frontend behavior and Terraform wiring, as well as any of the edge cases above. The task does not explicitly request tests; assess their quality and relevance rather than just their number. Distinguish a mentioned concern, an implemented safeguard, and a regression test that actually exercises the failure mode.\n\nUse source, full diff, validation and response as evidence; passing the original suite alone does not prove the new feature works. These cases are review criteria, not evidence that they were executed. Distinguish behavior inferred through source review from demonstrated coverage, and state uncertainty when the saved evidence cannot establish correctness. Favor a focused, coherent implementation with justified tradeoffs over either superficial happy-path code or speculative overengineering.\n",
+        "baseline_sha256": "174d57e74271014da6dbcda8ef44037f7b7bd5cc41079b5d6e3a4d48f58823d7",
+        "source_sha256": {}
+      }
+    }
+  ],
+  "synthesis": {
+    "short_decision": "astra provides the most convincing implementation and regression coverage; qwen and sol are useful but retain testing or state-management gaps. Other attempts leave configuration or frontend defects, while gemini leaves startup broken and the required frontend unfinished.",
+    "quality_scores": [
+      96,
+      60,
+      78,
+      20,
+      73,
+      78,
+      65,
+      65,
+      69,
+      85,
+      69,
+      82,
+      78
+    ]
+  },
+  "synthesis_provenance": {
+    "served_model": null,
+    "usage": {
+      "input_tokens": 65084,
+      "cached_input_tokens": 45952,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 557,
+      "reasoning_output_tokens": 210
+    }
+  },
+  "synthesis_policy": "holistic-quality-v1",
+  "evaluated_at": "2026-09-20T02:13:54.898535+00:00"
+}

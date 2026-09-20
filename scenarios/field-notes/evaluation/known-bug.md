@@ -1,0 +1,3 @@
+# Task evaluation: known-bug
+
+The report describes the real stale-summary race documented in the common guidance. Assess separately whether the candidate understood the cause, fixed it correctly, and independently added useful regression coverage. Merely refetching after delete is not sufficient: overlapping refreshes must not let old summary data win. Look for deterministic stale-response coverage that fails on the starting baseline, passes on the fix, and checks both summary counts and list contents. Judge test requirements by the saved task prompt. Explain the evidence and any remaining uncertainty.

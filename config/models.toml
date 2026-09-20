@@ -1,0 +1,19 @@
+# Reasoning defaults from https://openrouter.ai/api/v1/models (2026-09-19).
+# Informational only: requests still use model defaults; historical effective settings are not verified.
+[models]
+auto = "openrouter/auto-beta" # router-dependent; no fixed default.
+deepseek = "deepseek/deepseek-v4.1-flash" # enabled, effort=high.
+gemini = "google/gemini-3.8-flash" # enabled (mandatory), effort=medium.
+glm = "z-ai/glm-5.3-flash" # enabled (mandatory), effort=max.
+kimi = "moonshotai/kimi-k3" # enabled, effort=max.
+mimo = "xiaomi/mimo-v2.5" # enabled/effort defaults not published.
+minimax = "minimax/minimax-m3" # enabled/effort defaults not published.
+qwen-flash = "qwen/qwen3.8-flash" # enabled, effort not published.
+qwen = "qwen/qwen3.8-max-0902" # enabled (mandatory), effort=xhigh.
+sol = "openai/gpt-5.6-sol" # enabled, effort=medium.
+astra = "~openai/gpt-astra-latest" # enabled (mandatory), effort=medium.
+sonnet = "anthropic/claude-sonnet-5" # enabled, effort=high.
+opus = "anthropic/claude-opus-5" # enabled, effort=high.
+
+[providers]
+gemini = "google-vertex/global"

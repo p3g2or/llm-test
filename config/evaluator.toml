@@ -1,0 +1,5 @@
+# Only used with --backend openrouter; this backend incurs API charges.
+# Default Codex evaluation uses ChatGPT login and optional --model / --timeout.
+model = "anthropic/claude-opus-5"
+max_tokens = 4096
+timeout = 120
